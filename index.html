@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Card with Countdown and Automated Confetti</title>
+    <style>
+        /* Body and card styling */
+        body {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Hidden by default until countdown finishes */
+        .birthdayCard {
+            
+            display: none; /* Hide by default */
+        }
+
+        .birthdayCard.show {
+            display: block; /* Show after countdown */
+        }
+
+        .birthdayCard:hover {
+            transform: rotateY(180deg);
+        }
+
+      
+        .cardFront {
+            background-color: #ffe6f0;
+        }
+
+      
+       
+
+        .time-box {
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+    <!-- Countdown Timer Section -->
+    <div  class="container"  id="countdown">
+        
+        <div class="time-box">
+            
+            <span id="days"></span>
+            <p>Days</p>
+        </div>
+        <div class="time-box">
+            <span id="hours"></span>
+            <p>Hours</p>
+        </div>
+        <div class="time-box">
+            <span id="minutes"></span>
+            <p>Minutes</p>
+        </div>
+        <div class="time-box">
+            <span id="seconds"></span>
+            <p>Seconds</p>
+        </div>
+    </div>
+
+    <!-- Birthday Card Section (hidden by default) -->
+    <div class="body">
+        <div class="birthdayCard" onmouseover="confetti()">
+            <div class="cardFront">
+                <img src="https://github.com/DzarelDeveloper/Img/blob/main/ballon.png?raw=true" class="balloons" alt="balloons" />
+                <img src="https://github.com/DzarelDeveloper/Img/blob/main/hat.png?raw=true" alt="bdHat" class="bdHat" />
+                <img src="https://i.postimg.cc/Wpmgcqxr/R.png" alt="cake" class="cake" />
+                <h2 class="happy">Happy Birthday to Prince !!</h2>
+            </div>
+            <div class="cardInside">
+                <h3 class="back">HAPPY 20th BIRTHDAY, PRINCE!</h3> <p>13 September</p> <p>Happy Birthday, Prince! 🎉🎂 Today, we celebrate not only your 20th year of life but also the incredible journey you're on! You've conquered mountains, just like the beautiful hills you love so much, especially the breathtaking views of Jammu. 🌄⛰️</p> <p> 🏞️🌟</p> <p>Enjoy your special day, filled with joy, peace, and all the beauty of the hills! 🎉🎂</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Script -->
+    <script src='https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.browser.min.js'></script>
+    <script>
+        // Confetti from both sides
+        function confettiSide() {
+            var end = Date.now() + 3 * 1000; // Show confetti for 10 seconds
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // Countdown Timer Script
+        const targetDate = new Date("September 13 , 2024 00:14:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeRemaining = targetDate - now;
+
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+
+            if (timeRemaining < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").style.display = "none";
+                document.querySelector(".birthdayCard").classList.add("show");
+                confettiSide(); // Start confetti from both sides for 10 seconds
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>
