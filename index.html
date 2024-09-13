@@ -46,26 +46,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
+
     <!-- Countdown Timer Section -->
     <div  class="container"  id="countdown">
-        
+        <h2 style="color: aqua; font-size: 45px;">Countdown</h2>
         <div class="time-box">
             
-            <span id="days"></span>
-            <p>Days</p>
+            <span id="days" style="font-size: 34px;"></span> <h3>Days</h3>
+      
         </div>
         <div class="time-box">
-            <span id="hours"></span>
-            <p>Hours</p>
+            <span id="hours" style="font-size: 34px;"></span>
+            <h3>Hours</h3>
+           
         </div>
         <div class="time-box">
-            <span id="minutes"></span>
-            <p>Minutes</p>
+            <span id="minutes" style="font-size: 34px;"></span>
+           
+            <h3>Minutes</h3>
         </div>
         <div class="time-box">
-            <span id="seconds"></span>
-            <p>Seconds</p>
+            <span id="seconds" style="font-size: 34px;"></span>
+                      <h3>Seconds</h3>
         </div>
     </div>
 
@@ -112,7 +114,7 @@
         }
 
         // Countdown Timer Script
-        const targetDate = new Date("September 13 , 2024 00:14:00").getTime();
+        const targetDate = new Date("September 13 , 2024 18:15:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
